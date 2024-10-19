@@ -5,6 +5,8 @@ import { NewsModule } from './news/news.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { config } from './config';
 import { News } from './news/entities/news.entity';
+import { StoryModule } from './story/story.module';
+import { Story } from './story/entities/story.entity';
 
 @Module({
   imports: [
@@ -15,11 +17,12 @@ import { News } from './news/entities/news.entity';
       database: config.DATABASE_NAME,
       username: config.DATABASE_USERNAME,
       password: config.DATABASE_PASSWORD,
-      entities: [News
+      entities: [News, Story
        ],
       synchronize: true,
   }),
-    NewsModule],
+    NewsModule,
+    StoryModule],
   controllers: [AppController],
   providers: [AppService],
 })

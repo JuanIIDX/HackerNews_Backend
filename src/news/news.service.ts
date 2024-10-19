@@ -11,6 +11,8 @@ export class NewsService {
     @InjectRepository(News)
     private newsRepository: Repository<News>,
   ) {}
+
+  
   create(createNewsDto: CreateNewsDto) {
     const news = this.newsRepository.create(createNewsDto);
     return this.newsRepository.save(news);
