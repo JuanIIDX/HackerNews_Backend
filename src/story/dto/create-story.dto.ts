@@ -1,1 +1,7 @@
-export class CreateStoryDto {}
+
+export class CreateStoryDto {
+
+
+
+
+}

@@ -1,51 +1,49 @@
 
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column , OneToMany } from 'typeorm';
+import { Comment } from './comment.entity';
+import { Tag } from './tag.entity';
 
 
 
 @Entity('news')
-export class News {
-    @PrimaryGeneratedColumn()
+export class News {  @PrimaryGeneratedColumn()
     id: number;
-
-    @Column({nullable:true})
-    title: string;
- 
-    @Column({nullable:true})
-    content: string;
-
-    @Column({nullable:true})
+  
+    @Column()
+    author: string;
+  
+    @Column('text')
     comment_text: string;
-
-    @Column({nullable:true})
-    created_at: string;
-
-    @Column({nullable:true})
+  
+    @Column()
+    created_at: Date;
+  
+    @Column('bigint')
     created_at_i: number;
-
-    @Column({nullable:true})
+  
+    @Column()
     objectID: string;
-
-    @Column({nullable:true})
-    parent_id: number;
-
-    @Column({nullable:true})
-    story_id: number;
-
-    @Column({nullable:true})
+  
+    @Column({ nullable: true })
+    parent_id: string;
+  
+    @Column()
+    story_id: string;
+  
+    @Column()
     story_title: string;
-
-    @Column({nullable:true})
+  
+    @Column()
     story_url: string;
+  
+    @Column()
+    updated_at: Date;
 
-    @Column({nullable:true})
-    updated_at: string;
-
-    @Column({nullable:true})
-    tags: string;
-
-    @Column({nullable:true})
-    url: string;
+    @OneToMany(() => Tag, (tag) => tag.news)
+    tags: Tag[];
+  
+    @OneToMany(() => Comment, (comment) => comment.news)
+    comments: Comment[];
 
 
 }
