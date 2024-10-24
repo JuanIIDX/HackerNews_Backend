@@ -16,11 +16,11 @@ import { Tag } from './news/entities/tag.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mssql',
-      host:  config.host||process.env.host ,
+      host:  process.env.host ,
       port: 1433, // Puerto por defecto de SQL Server
-      username:   config.username || process.env.username,
-      password:  config.password ||process.env.password ,
-      database:   config.database ||process.env.database,
+      username:   process.env.username,
+      password:  process.env.password ,
+      database:   process.env.database,
       entities: [News, Comment, Tag],
       synchronize: false, // Sincroniza automáticamente la base de datos (desactiva en producción)
       options: {
