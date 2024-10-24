@@ -4,7 +4,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { config } from '../config';
 import { News } from './news/entities/news.entity';
 import { NewsModule } from './news/news.module';
 import { StoryModule } from './story/story.module';
