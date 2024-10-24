@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { config } from './config';
+import { config } from '../config';
 import { News } from './news/entities/news.entity';
 import { NewsModule } from './news/news.module';
 import { StoryModule } from './story/story.module';
@@ -16,11 +16,11 @@ import { Tag } from './news/entities/tag.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mssql',
-      host: process.env.host || config.host,
+      host:  config.host||process.env.host ,
       port: 1433, // Puerto por defecto de SQL Server
-      username: process.env.username || config.username,
-      password: process.env.password || config.password,
-      database: process.env.database || config.database,
+      username:   config.username || process.env.username,
+      password:  config.password ||process.env.password ,
+      database:   config.database ||process.env.database,
       entities: [News, Comment, Tag],
       synchronize: false, // Sincroniza automáticamente la base de datos (desactiva en producción)
       options: {
@@ -33,4 +33,7 @@ import { Tag } from './news/entities/tag.entity';
   controllers: [AppController],
   providers: [AppService],
 })
+
+
+
 export class AppModule {}
