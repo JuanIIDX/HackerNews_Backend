@@ -1,3 +1,6 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
 name: Build and deploy Node.js app to Azure Web App - HackerNewsBackend1
 
 on:
@@ -8,30 +11,30 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Check out code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Set up Node.js version
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: '18.x'
 
       - name: npm install, build, and test
         run: |
           npm install
           npm run build --if-present
-      
-      - name: Zip all files for upload between jobs
-        run: Compress-Archive -Path .\* -DestinationPath output.zip
+          npm run test --if-present
+
+      - name: Zip artifact for deployment
+        run: zip release.zip ./* -r
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: output.zip
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -40,7 +43,7 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write
+      id-token: write #This is required for requesting the JWT
 
     steps:
       - name: Download artifact from build job
@@ -49,14 +52,14 @@ jobs:
           name: node-app
 
       - name: Unzip artifact for deployment
-        run: unzip output.zip
-
+        run: unzip release.zip
+      
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_66FCDEF8564D4DA09D140C912EB46104 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_37A50A36A9984703AFDBF0FFE666A9EE }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_0C269BDD3990432199F6712CB3C858A6 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_1BCDA178F74C4FFD854F23A78468DDF3 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_A07E23CE607944B58005F83A55FF98B0 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_FEDD3A7B1C1F4168867D344D2724584D }}
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
@@ -65,3 +68,4 @@ jobs:
           app-name: 'HackerNewsBackend1'
           slot-name: 'Production'
           package: .
+          
