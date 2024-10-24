@@ -10,7 +10,7 @@ export class StoryController {
   
   //obtiene los datos de la tabla news a partir del servicio de noticias
   @Get('search_by_date')
-  @ApiOperation({ summary: 'Obtiene los datos de la tabla news' })
+  @ApiOperation({ summary: 'Obtiene los datos de la tabla news---Es el que usa en la prueba' })
   @ApiQuery({ name: 'page', required: false, type: Number, description: 'Página actual' })
   @ApiQuery({ name: 'query', required: false, type: String, description: 'Búsqueda en el título o texto de la historia' })
   @ApiQuery({ name: 'hitsPerPage', required: false, type: Number, description: 'Número de resultados por página' })

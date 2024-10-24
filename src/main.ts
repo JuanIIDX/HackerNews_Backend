@@ -4,6 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const port = process.env.PORT || 3000
 
     // Habilitar CORS
     app.enableCors({
@@ -14,16 +15,16 @@ async function bootstrap() {
 
     // Configuración de Swagger
     const config = new DocumentBuilder()
-    .setTitle('API de ejemplo')
+    .setTitle('API para la prueba tecnia de Hacker News')
     .setDescription('Documentación de la API')
     .setVersion('1.0')
-    .addTag('news') // Puedes agregar etiquetas para organizar los endpoints
+    .addTag('news') 
     .build();
 
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('api', app, document); // Ruta para acceder a Swagger
 
-    await app.listen(3000);
+    await app.listen(port);
   
 
 }
