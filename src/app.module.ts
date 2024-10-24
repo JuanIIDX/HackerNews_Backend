@@ -22,7 +22,7 @@ import { Tag } from './news/entities/tag.entity';
       password:  process.env.DB_PASSWORD ,
       database:   process.env.DB_DATABASE,
       entities: [News, Comment, Tag],
-      synchronize: false, // Sincroniza automáticamente la base de datos (desactiva en producción)
+      synchronize: false, // Sincroniza automáticamente la base de datos
       options: {
         encrypt: true, // Cifrado SSL, útil para conexiones seguras
         trustServerCertificate: true, // Usar solo si el servidor no tiene certificado SSL confiable
