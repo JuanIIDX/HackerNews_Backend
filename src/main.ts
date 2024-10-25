@@ -4,14 +4,7 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
-
-
-
-
-
   const app = await NestFactory.create(AppModule);
-  const port = process.env.PORT || 3000
-
 
     // Habilitar CORS
     app.enableCors({
@@ -19,6 +12,7 @@ async function bootstrap() {
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
       allowedHeaders: 'Content-Type, Accept, Authorization',
     });
+
 
     // Configuración de Swagger
     const config = new DocumentBuilder()
@@ -29,10 +23,10 @@ async function bootstrap() {
     .build();
 
     const document = SwaggerModule.createDocument(app, config);
-    SwaggerModule.setup('api', app, document); // Ruta para acceder a Swagger
+    SwaggerModule.setup('api1', app, document); // Ruta para acceder a Swagger
 
-    await app.listen(port);
-  
 
+
+  await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

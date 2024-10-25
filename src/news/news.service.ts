@@ -1,9 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { CreateNewsDto } from './dto/create-news.dto';
-import { UpdateNewsDto } from './dto/update-news.dto';
+import { InjectRepository } from '@nestjs/typeorm';
 import { News } from './entities/news.entity';
 import { ILike, Like, Repository } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class NewsService {
